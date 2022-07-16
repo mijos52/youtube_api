@@ -1,3 +1,4 @@
+from socketserver import DatagramRequestHandler
 import streamlit
 import logging
 from  youtube_search import youtube_search
@@ -22,11 +23,16 @@ def on_search_entry(search_input:str)->None:
   return youtube_search(search_input)
  
 def draw_search_result(url_list:list) -> None:
-  pass
+    for i in url_list:
+        streamlit.image(i)
+  
 
 
 log_info()
 main_page()
-sidebar_elements()
+x = sidebar_elements()
+y = on_search_entry(x)
+draw_search_result(y)
+
 
 
