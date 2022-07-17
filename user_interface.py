@@ -21,17 +21,16 @@ def sidebar_elements() -> str:
 def on_search_entry(search_input:str)->list:
   return youtube_search(search_input)
  
-def draw_search_result(url_list:list) -> None:
-    for i in url_list:
+def draw_search_result(thumb) -> None:
+    for i in thumb:
         streamlit.image(i)
-  
-
+    
 
 log_info()
 main_page()
 x = sidebar_elements()
-y = on_search_entry(x)
-draw_search_result(y)
+thumb = on_search_entry(x)
+draw_search_result(thumb)
 
 
 

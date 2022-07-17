@@ -22,16 +22,17 @@ def youtube_search(search:int) -> list:
     videoType="any"
   ).execute()
 
-
-  videos = []
+  video_title = []
+  video_id = []
+  video_thumb = []
 
   for search_result in search_response.get('items', []):
     if search_result['id']['kind'] == 'youtube#video':
-      # videos.append('%s %s (%s)' % (search_result['snippet']['title'],search_result['snippet']['thumbnails']['high'],
-      #                            search_result['id']['videoId']))
-      videos.append('%s' % search_result['snippet']['thumbnails']['high']['url'])
+      video_id.append(search_result['id']['videoId'])
+      video_thumb.append(search_result['snippet']['thumbnails']['high']['url'])
+      video_title.append(search_result['snippet']['title'])
+  
 
-  return(videos)
-
+  return(video_thumb)
 
 
