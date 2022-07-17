@@ -1,4 +1,3 @@
-from socketserver import DatagramRequestHandler
 import streamlit
 import logging
 from  youtube_search import youtube_search
@@ -12,14 +11,14 @@ def main_page() -> None:
   streamlit.title('Search Results')
   streamlit.write('Find Youtube Videos ')
 
-def sidebar_elements() -> None:
+def sidebar_elements() -> str:
   sidebar = streamlit.sidebar
   sidebar.title('Search Dashboard')
   search_string = sidebar.text_input('Search String')
   sidebar.button(label='Go', on_click=on_search_entry(search_input=search_string))
   return search_string
 
-def on_search_entry(search_input:str)->None:
+def on_search_entry(search_input:str)->list:
   return youtube_search(search_input)
  
 def draw_search_result(url_list:list) -> None:
