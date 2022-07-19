@@ -1,38 +1,47 @@
 import config
 from googleapiclient.discovery import build
+from pprint import pprint
 
 
-def youtube_search(search:int) -> list:
+def youtube_search(search: int) -> list:
 
-  youtube = build(config.YOUTUBE_API_SERVICE_NAME, config.YOUTUBE_API_VERSION,developerKey=config.API_KEY)
+    youtube = build(
+        config.YOUTUBE_API_SERVICE_NAME,
+        config.YOUTUBE_API_VERSION,
+        developerKey=config.API_KEY,
+    )
 
-  search_response = youtube.search().list(
-    part="snippet",
-    q=search,
-    channelType="any",
-    order="relevance",
-    safeSearch="none",
-    videoCaption="any",
-    videoDefinition="any",
-    videoDimension="any",
-    videoDuration="any",
-    videoEmbeddable="any",
-    videoLicense="any",
-    videoSyndicated="any",
-    videoType="any"
-  ).execute()
+    r = (
+        youtube.search()
+        .list(
+            part="snippet",
+            q=search,
+            channelType="any",
+            order="relevance",
+            safeSearch="none",
+            videoCaption="any",
+            videoDefinition="any",
+            videoDimension="any",
+            videoDuration="any",
+            videoEmbeddable="any",
+            videoLicense="any",
+            videoSyndicated="any",
+            videoType="any",
+        )
+        .execute()
+    )
 
-  video_title = []
-  video_id = []
-  video_thumb = []
+    r = r["items"]
 
-  for search_result in search_response.get('items', []):
-    if search_result['id']['kind'] == 'youtube#video':
-      video_id.append(search_result['id']['videoId'])
-      video_thumb.append(search_result['snippet']['thumbnails']['high']['url'])
-      video_title.append(search_result['snippet']['title'])
-  
+    " r is the search reponse dict"
 
-  return(video_thumb)
-
-
+    data_list = []
+    for i in r:
+        if i["id"]["kind"] == "youtube#video":
+            list_ = [
+                i["id"]["videoId"],
+                i["snippet"]["thumbnails"]["medium"]["url"],
+                i["snippet"]["title"],
+            ]
+            data_list.append(list_)
+    return data_list
