@@ -1,5 +1,14 @@
-### Simple youtube search api
+### Advanced youtube search api
 
-- searches for keys 
-- returns thumbnail_, videoid_ and title for now
-- streamlit is used to provide userinface 
+- Searches based on variouse params
+- Returns top 5 results for now
+- Main embeded youtube player 
+
+## Features
+
+- Multi parameter search
+
+
+## Screenshots
+
+!()[]
